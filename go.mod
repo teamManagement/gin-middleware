@@ -1,4 +1,4 @@
-module github.com/devloperPlatform/go-gin-base
+module github.com/teamManagement/gin-middleware
 
 go 1.15
 
