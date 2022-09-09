@@ -52,7 +52,7 @@ func WrapperResponseHandle(fn ServiceFun) gin.HandlerFunc {
 		result := fn(context)
 		resCode, exists := context.Get("resCode")
 		if !exists {
-			resCode = 0
+			resCode = 200
 		}
 
 		code, ok := resCode.(int)
@@ -61,7 +61,7 @@ func WrapperResponseHandle(fn ServiceFun) gin.HandlerFunc {
 		}
 
 		switch v := result.(type) {
-		case HttpResult:
+		case HttpResult, *HttpResult:
 			context.JSON(code, v)
 		case error:
 			panic(v)
