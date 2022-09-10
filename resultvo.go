@@ -1,5 +1,7 @@
 package ginmiddleware
 
+import "fmt"
+
 // HttpResult http响应结果封装
 type HttpResult struct {
 	// Code 消息代码
@@ -22,19 +24,19 @@ func NewSuccessHttpResultWithResult(result interface{}) *HttpResult {
 }
 
 // NewErrorHttpResultWithMsg 新创建一个错误的httpResult根据错误信息
-func NewErrorHttpResultWithMsg(str string) *HttpResult {
+func NewErrorHttpResultWithMsg(format string, args ...any) *HttpResult {
 	return &HttpResult{
 		Code:  "1",
-		Msg:   str,
+		Msg:   fmt.Sprintf(format, args...),
 		Error: true,
 	}
 }
 
 // NewErrorHttpResultWithCodeAndMsg 创建一个错误的httpResult根据错误信息
-func NewErrorHttpResultWithCodeAndMsg(code, msg string) *HttpResult {
+func NewErrorHttpResultWithCodeAndMsg(code, format string, args ...any) *HttpResult {
 	return &HttpResult{
 		Code:  code,
-		Msg:   msg,
+		Msg:   fmt.Sprintf(format, args...),
 		Error: true,
 	}
 }

@@ -60,6 +60,11 @@ func WrapperResponseHandle(fn ServiceFun) gin.HandlerFunc {
 			code = 200
 		}
 
+		if result == nil {
+			context.JSON(code, NewSuccessHttpResult())
+			return
+		}
+
 		switch v := result.(type) {
 		case HttpResult, *HttpResult:
 			context.JSON(code, v)
