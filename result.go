@@ -69,7 +69,7 @@ func WrapperResponseHandle(fn ServiceFun) gin.HandlerFunc {
 		case HttpResult, *HttpResult:
 			context.JSON(code, v)
 		case error:
-			panic(v)
+			context.JSON(code, NewErrorHttpResultWithMsg(v.Error()))
 		default:
 			context.JSON(code, NewSuccessHttpResultWithResult(v))
 
